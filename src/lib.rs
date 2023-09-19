@@ -413,6 +413,19 @@ impl BitcoinD {
             Auth::CookieFile(self.params.cookie_file.clone()),
         )?)
     }
+
+    #[cfg(any(feature = "0_19_1", not(feature = "download")))]
+    /// Create a new watch-only wallet in the running node, and return an RPC client connected to
+    /// the just created wallet
+    pub fn create_watch_only_wallet<T: AsRef<str>>(&self, wallet: T) -> anyhow::Result<Client> {
+        let _ = self
+            .client
+            .create_wallet(wallet.as_ref(), Some(true), None, None, None)?;
+        Ok(Client::new(
+            &self.rpc_url_with_wallet(wallet),
+            Auth::CookieFile(self.params.cookie_file.clone()),
+        )?)
+    }
 }
 
 #[cfg(feature = "download")]
