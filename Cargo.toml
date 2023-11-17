@@ -11,7 +11,7 @@ edition = "2018"
 categories = ["cryptography::cryptocurrencies", "development-tools::testing"]
 
 [dependencies]
-bitcoincore-rpc = { version = "0.18.0" }
+bitcoincore-rpc = { git = "https://github.com/mplsgrant/rust-bitcoincore-rpc.git", branch = "mpls-tweaks" }
 log = "0.4"
 which = "4.2.5"
 anyhow = "1.0.66"
